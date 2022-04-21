@@ -5,7 +5,8 @@ export class Customer {
     private _id: string,
     private _name: string,
     private _address: Address,
-    private _active: boolean
+    private _active: boolean,
+    private _rewardPoints: number = 0
   ) {
     this.validate();
   }
@@ -19,12 +20,28 @@ export class Customer {
     }
   }
 
+  get id(): string {
+    return this._id;
+  }
+
   get name(): string {
     return this._name;
   }
 
   get isActive(): boolean {
     return this._active;
+  }
+
+  get rewardPoints(): number {
+    return this._rewardPoints;
+  }
+
+  get address(): Address {
+    return this._address;
+  }
+
+  addRewardPoints(points: number) {
+    this._rewardPoints += points;
   }
 
   changeName(name: string) {
