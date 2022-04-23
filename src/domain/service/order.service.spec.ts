@@ -5,7 +5,7 @@ import { OrderItem } from "../entiity/order-item";
 import { OrderService } from "./order.service";
 
 describe("Order Service unit tests", () => {
-  it("should add award to customer", () => {
+  it("should add any order", () => {
     const address = new Address("street 1", "city", "state", "89040115");
     const customer = new Customer("c1", "customer 1", address, true);
     const i1 = new OrderItem("i1", "p1", 2, 100);
@@ -15,5 +15,13 @@ describe("Order Service unit tests", () => {
 
     expect(order.total()).toBe(600);
     expect(customer.rewardPoints).toBe(300);
+  });
+  it("should throws when add order without any item", () => {
+    const address = new Address("street 1", "city", "state", "89040115");
+    const customer = new Customer("c1", "customer 1", address, true);
+
+    expect(() => {
+      const order: Order = OrderService.placeOrder(customer, []);
+    }).toThrowError("Order must have at least one item");
   });
 });
